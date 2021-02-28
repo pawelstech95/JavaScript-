@@ -1,0 +1,16 @@
+.zmienKolor1 {
+    color: red;
+}
+#minus, #plus{
+    font-size: 38px;
+    float: left;
+    margin: 50px;
+}
+.pomniejsz{
+    font-size: 20px!important;
+    color: red;
+}
+.powieksz {
+    font-size: 80px!important;
+    color: red;
+}

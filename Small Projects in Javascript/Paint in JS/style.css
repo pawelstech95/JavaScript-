@@ -1,0 +1,10 @@
+body{
+    height: 100vh;
+    margin: 0px;
+}
+div{
+    width: 5px;
+    height: 5px;border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+}

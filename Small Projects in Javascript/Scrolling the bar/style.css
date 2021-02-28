@@ -1,0 +1,13 @@
+#status {
+  height: 4vh;
+  width: 0%;
+  background-color: cornflowerblue;
+  transition: 0.6s linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+body{
+    height: 500vh;
+    background-color: cornsilk;
+}

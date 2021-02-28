@@ -1,0 +1,15 @@
+.circle{
+    width: 50px;
+    height: 50px;
+    background-color: darkblue;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+}
+.info {
+    font-style: 28px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
