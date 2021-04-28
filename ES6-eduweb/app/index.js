@@ -1,38 +1,39 @@
-// let i const
-// zmienne tworzone za pomocą let nie są wynoszone na gore tj var
-// nie dziala zjawisko hoistingu
+// // let i const
+// // zmienne tworzone za pomocą let nie są wynoszone na gore tj var
+// // nie dziala zjawisko hoistingu
 
-(function () {
-  let firstName = 'Jan';
+// // literały
+// //  -literałem  obiektu jest obiekt {}
+// //           tablicy []
 
-  // if(true) {
-  //     let lastName = "Kowalski";
-  // }
+// // consise methods - skrócenie metody
+// // syntactic sugar - dostajemy cos co zapisujemy inaczej ale działa tak samo
 
-  // console.log( typeof lastName );
+//                     let firstName = 'Jan',
+//                     lastName = 'Kowalski';
 
-  // let lastName = "Kowalski";
+//                     let fnName = 'getFullName';
 
-  // let fns = [];
+//                     let person = {
+//                     firstName,
+//                     lastName,
+//                     [fnName + '1']: 'Witaj', // w consoli person.getFullName1 zwróci 'Witaj'
+//                     [fnName]() {
+//                         // consise method - skrócone metody
+//                         return this.firstName + ' ' + this.lastName;
+//                     },
+//                     };
 
-  // for(let i = 0; i < 10; i++) {
-  //     fns.push(function() {
-  //         console.log("Wartość i to: " + i);
-  //     });
-  // }
+//                     person[fnName] = function () {
+//                     return this.firstName + ' ' + this.lastName;
+//                     };
 
-  // fns.forEach(function(fn) {
-  //     fn();
-  // })
+//                     console.log(person.getFullName());
 
-  const person = {
-    firstName: 'Jan',
-    lastName: 'Kowalski',
-  };
+// // wewnątrz literału obiektu {}, [] możemy tworzyć właściwośli
+// // dynamiczne tworzenie za pomocą [fnName]
+// // https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Grammar_and_types
+// // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining?fbclid=IwAR3Ecu2F8OAKfVWGEuz5ni4-egyOd25oowiBfre8drnV_LjE4GCsH7yAWcw
 
-  person.firstName = 'Adam';
 
-  console.log(person);
-})();
 
-let firstName = 'Piotr';
