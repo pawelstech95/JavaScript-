@@ -1,0 +1,10 @@
+console.log( Number.parseInt("20zł") );
+console.log( Number.parseFloat("20.50zł") );
+console.log( Number.isNaN(undefined) );
+console.log( isNaN(undefined) );
+console.log( Number.isFinite("20") );
+console.log( isFinite("20") );
+console.log( Number.isInteger(20.05) );
+console.log( Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) );
+console.log( Number.isSafeInteger(Number.MIN_SAFE_INTEGER - 1) );
+console.log( Number.EPSILON );
