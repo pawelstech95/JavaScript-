@@ -1,47 +1,43 @@
-// // let i const
-// // zmienne tworzone za pomocą let nie są wynoszone na gore tj var
-// // nie dziala zjawisko hoistingu
-
-// // literały
-// //  -literałem  obiektu jest obiekt {}
-// //           tablicy []
-
-// // consise methods - skrócenie metody
-// // syntactic sugar - dostajemy cos co zapisujemy inaczej ale działa tak samo
-
+//                  ----->                   let i const
 //
 //
+// zmienne tworzone za pomocą let nie są wynoszone na gore tj var
+// nie dziala zjawisko hoistingu
 
-// let firstName = 'Jan',
-// lastName = 'Kowalski';
+//                   ----->                     literały
+//  -literałem  obiektu jest obiekt {}
+//           tablicy []
 
-// let fnName = 'getFullName';
+// consise methods - skrócenie metody
+// syntactic sugar - dostajemy cos co zapisujemy inaczej ale działa tak samo
 
-// let person = {
-// firstName,
-// lastName,
-// [fnName + '1']: 'Witaj', // w consoli person.getFullName1 zwróci 'Witaj'
-// [fnName]() {
-//     // consise method - skrócone metody
-//     return this.firstName + ' ' + this.lastName;
-// },
-// };
+let firstName = 'Jan',
+  lastName = 'Kowalski';
 
-// person[fnName] = function () {
-// return this.firstName + ' ' + this.lastName;
-// };
+let fnName = 'getFullName';
 
-// console.log(person.getFullName());
+let person = {
+  firstName,
+  lastName,
+  [fnName + '1']: 'Witaj', // w consoli person.getFullName1 zwróci 'Witaj'
+  [fnName]() {
+    // consise method - skrócone metody
+    return this.firstName + ' ' + this.lastName;
+  },
+};
 
-//
-//
+person[fnName] = function () {
+  return this.firstName + ' ' + this.lastName;
+};
 
-// // wewnątrz literału obiektu {}, [] możemy tworzyć właściwośli
-// // dynamiczne tworzenie za pomocą [fnName]
-// // https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Grammar_and_types
-// // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining?fbclid=IwAR3Ecu2F8OAKfVWGEuz5ni4-egyOd25oowiBfre8drnV_LjE4GCsH7yAWcw
+console.log(person.getFullName());
 
-// Object
+// wewnątrz literału obiektu {}, [] możemy tworzyć właściwośli
+// dynamiczne tworzenie za pomocą [fnName]
+// https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Grammar_and_types
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining?fbclid=IwAR3Ecu2F8OAKfVWGEuz5ni4-egyOd25oowiBfre8drnV_LjE4GCsH7yAWcw
+
+//              ----->                      Object
 
 //setPrototypeOf
 // person jest naszym konstruktorem(klasa)
@@ -71,8 +67,7 @@ console.log(person2.sayHello());
 // klasa Preson dziala na wszystkie new Person chyba ze nadpiszemy
 // tak jak powyzej
 
-// Object.assign()
-
+//           ----->                                 Object.assign()
 function slider(config) {
   // slider obrazow
 
@@ -103,9 +98,7 @@ slider({
   fn() {}, // to bedzie zawsze dokladnie ta sama funkcja(zobacz console.log)
 });
 
-// Object.is() - dziala tak jak operator === 
-
-console.log('Object.is({}, {})');
+console.log('Object.is({}, {})'); // Object.is() - dziala tak jak operator ===
 console.log(Object.is({}, {}));
 
 console.log('Object.is(22, 22)');
@@ -116,3 +109,5 @@ console.log(Object.is(-0, +0));
 
 console.log('Object.is(NaN, NaN)');
 console.log(Object.is(NaN, NaN));
+
+//     ----->                     Arrow Function
