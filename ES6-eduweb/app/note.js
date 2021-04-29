@@ -148,3 +148,48 @@ console.log(Person.prototype);
 let person1 = new Person('Anna');
 // arrow function nie moze być konstruktorem(problem z this)
 // nie mają też prototypu
+
+//
+
+function multiply(number, multiplyBy = 2) {
+  // multiplyBy = multiplyBy || 2;
+  // multiplyBy = multiplyBy === undefined ? 2 : multiplyBy;
+
+  return number * multiplyBy;
+}
+
+//  --------->        lazy evaluation
+// getCountryInfo(countryInfo = getCountryCode('Polska'))
+// jezeli podamy country info tj w pierwszej funkcji
+//to nie ma sensu przechodzic do getCountryCode('Polska')
+
+function getCountryCode(country, code = country.toUpperCase().slice(0, 3)) {
+  // jako code mozemy przypisac poprzednia wartosc czyli country
+  console.log('Wykonuję funkcję getCountryCode');
+
+  return {
+    country,
+    code,
+  };
+}
+
+function getCountryInfo(countryInfo = getCountryCode('Polska')) {
+  return (
+    'Państwo to ' + countryInfo.country + ', a jego kod to ' + countryInfo.code
+  );
+}
+
+//  Domyślne parametry i zmienna arguments
+
+
+function multiplyBy(x, n = x) {
+
+  console.log(arguments.length);
+
+  arguments[1] = 10;
+
+  return x * n;
+
+}
+
+//domyślne  parametry nie liczą sie w index
