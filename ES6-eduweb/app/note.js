@@ -111,3 +111,40 @@ console.log('Object.is(NaN, NaN)');
 console.log(Object.is(NaN, NaN));
 
 //     ----->                     Arrow Function
+
+function getArgs() {
+  let args = () => {
+    // zeby funkcja strzałkowa miala dostep do wlaściwosci
+    console.log(arguments); // arguments musimy ja opleść w inna funkcje
+  }; // tylko ze to sa argumenty etArgs
+  args();
+}
+
+getArgs(1, 2, 3);
+//
+//
+let person = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+
+  sayHello: () => {
+    // kontekst window
+    this.firstName + ' ' + this.lastName;
+  },
+};
+
+// setTimeout tez kieruje na obiekt globalny
+document.querySelector('#button-07').onclick = (e) =>
+  console.log(e.target === this); // false
+// podczas przypisywania zdarzen e.target za pomoca arrow function
+// to this nie odwoła się do np. przycisku (onClick)
+
+let Person = (firstName) => {
+  this.firstName = firstName;
+};
+
+console.log(Person.prototype);
+
+let person1 = new Person('Anna');
+// arrow function nie moze być konstruktorem(problem z this)
+// nie mają też prototypu
