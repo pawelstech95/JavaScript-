@@ -1,5 +1,0 @@
-function getName() {
-
-    return "Jan";
-
-}

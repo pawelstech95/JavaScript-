@@ -247,3 +247,23 @@ function calculate(type, ...args) {
 }
 console.log(calculate('sum', 2, 22, 222, 2222, 222222));
 console.log(calculate('multiply', 2, 22, 222, 2222, 222222));
+
+
+// --------------->        ...spread
+
+let numbers = [12, 3, 9, 22, 11, 6];
+
+// console.log( Math.max.apply(Math, numbers) ); // this=math, parametr=number
+console.log(Math.max(...numbers));
+// rest zwraca reszte
+// spreed rozbija nam tablice
+let numbers2 = [2, 33, 10, ...numbers, 1, 75];
+
+console.log([...numbers2, ...numbers, 100]);//nowa tablica
+
+function strToArray(string = '') {
+  return [...string];
+}
+
+
+console.log(strToArray());
