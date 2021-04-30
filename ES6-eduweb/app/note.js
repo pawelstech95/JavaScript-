@@ -267,3 +267,21 @@ function strToArray(string = '') {
 
 
 console.log(strToArray());
+
+
+// -------->      destructering
+// objects
+//
+function getSth() {
+  return {}; // nie mozemy podac null
+} // nie mozna zrobic destrukturyzacji na null or undefined
+
+let { x: xNew, y: y, z } = getSth() || {}; // zawsze musi byc cos wtedy x,y,z = undefined
+ 
+// zmienne moga byc tworzone wczesniej
+// let fName, lastName;
+//({firstName: fname, lastName} = person) // musimy pamiętać o ()
+//
+// array
+[a,b] = [b,a]
+
