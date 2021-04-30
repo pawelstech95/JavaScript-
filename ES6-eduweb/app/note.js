@@ -192,4 +192,5 @@ function multiplyBy(x, n = x) {
 
 }
 
-//domyślne  parametry nie liczą sie w index
+//domyślne  parametry nie liczą sie w index??
+// domyślny nie jest brany pod uwage
