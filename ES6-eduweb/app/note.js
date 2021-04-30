@@ -3,7 +3,20 @@
 //
 // zmienne tworzone za pomocą let nie są wynoszone na gore tj var
 // nie dziala zjawisko hoistingu
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //                   ----->                     literały
 //  -literałem  obiektu jest obiekt {}
 //           tablicy []
@@ -36,7 +49,20 @@ console.log(person.getFullName());
 // dynamiczne tworzenie za pomocą [fnName]
 // https://developer.mozilla.org/pl/docs/Web/JavaScript/Guide/Grammar_and_types
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining?fbclid=IwAR3Ecu2F8OAKfVWGEuz5ni4-egyOd25oowiBfre8drnV_LjE4GCsH7yAWcw
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //              ----->                      Object
 
 //setPrototypeOf
@@ -66,7 +92,20 @@ console.log(person2.sayHello());
 // ustalamy nowy prototyp dla konkretnej funkcji
 // klasa Preson dziala na wszystkie new Person chyba ze nadpiszemy
 // tak jak powyzej
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //           ----->                                 Object.assign()
 function slider(config) {
   // slider obrazow
@@ -109,7 +148,20 @@ console.log(Object.is(-0, +0));
 
 console.log('Object.is(NaN, NaN)');
 console.log(Object.is(NaN, NaN));
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //     ----->                     Arrow Function
 
 function getArgs() {
@@ -157,7 +209,20 @@ function multiply(number, multiplyBy = 2) {
 
   return number * multiplyBy;
 }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //  --------->        lazy evaluation
 // getCountryInfo(countryInfo = getCountryCode('Polska'))
 // jezeli podamy country info tj w pierwszej funkcji
@@ -191,7 +256,20 @@ function multiplyBy(x, n = x) {
 
 //domyślne  parametry nie liczą sie w index??
 // domyślny nie jest brany pod uwage
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // ---------------->        Nazwa funkcji i debugowanie
 // w consoli getName.name mamy dostęp do nazwy funkcji
 //  dzieki name mamy np info pofczas wyrzucenia bledu
@@ -212,6 +290,20 @@ let getName = function () {
   return 'jan';
 };
 let newFn = getName.bind(null); // newFn.name = 'bound getName'
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 // -------------->   Rest
@@ -247,8 +339,20 @@ function calculate(type, ...args) {
 }
 console.log(calculate('sum', 2, 22, 222, 2222, 222222));
 console.log(calculate('multiply', 2, 22, 222, 2222, 222222));
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // --------------->        ...spread
 
 let numbers = [12, 3, 9, 22, 11, 6];
@@ -259,16 +363,27 @@ console.log(Math.max(...numbers));
 // spreed rozbija nam tablice
 let numbers2 = [2, 33, 10, ...numbers, 1, 75];
 
-console.log([...numbers2, ...numbers, 100]);//nowa tablica
+console.log([...numbers2, ...numbers, 100]); //nowa tablica
 
 function strToArray(string = '') {
   return [...string];
 }
 
-
 console.log(strToArray());
-
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // -------->      destructering
 // objects
 //
@@ -277,11 +392,111 @@ function getSth() {
 } // nie mozna zrobic destrukturyzacji na null or undefined
 
 let { x: xNew, y: y, z } = getSth() || {}; // zawsze musi byc cos wtedy x,y,z = undefined
- 
+
 // zmienne moga byc tworzone wczesniej
 // let fName, lastName;
 //({firstName: fname, lastName} = person) // musimy pamiętać o ()
 //
 // array
-[a,b] = [b,a]
+[a, b] = [b, a];
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------->      destrukturyzacja zagnieżdżona
+let {
+  firstName: fname,
+  age,
+  job: { name: jobNeme, experiance }, // obiekt w obiekcie podczas destrukturyzacji
+} = person || {};
+// tworzymy wzorzec dopasowany do obiektu
+// np fname = 'jan'
+// name: 'programista'
+favNumb: {
+  list: [, second]; // w favNumb robimy destrukturyzacje zagniezdzona
+} // i destrukturyzacje [1,2] = [, second]
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------->      20. Domyślne wartości i operator rest
+//  rest = ...rest - czyli reszta z tabl numbers
+//
 
+// let numbers = [10, 20, 30, 40, 50];
+
+// let [first, second, , ...rest] = numbers || [];
+
+// console.log(first, second, rest);
+
+let numbers = [10];
+
+let [first, second = 2] = numbers || []; // bląd tylko jezeli nie ma deklaracji
+
+// console.log(first, second);
+
+let person = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+  age: 49,
+};
+
+let { firstName, lastName, job: position = 'Programista' } = person || {};
+
+console.log(firstName, lastName, position);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 21. Dekompozycja parametrów funkcji
+//
+function setSliderSpeed({ speed, easing } = {}) {
+
+  let slider = {};
+
+  slider.speed = speed;
+  slider.easing = easing;
+
+  console.log(slider);
+
+}
+
+const config = {
+  autoPlay: true,
+  speed: 500,
+  pause: 2000,
+  easing: "linear",
+  infinite: true
+};
+
+setSliderSpeed(config);
