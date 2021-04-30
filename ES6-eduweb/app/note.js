@@ -181,16 +181,69 @@ function getCountryInfo(countryInfo = getCountryCode('Polska')) {
 
 //  Domyślne parametry i zmienna arguments
 
-
 function multiplyBy(x, n = x) {
-
   console.log(arguments.length);
 
   arguments[1] = 10;
 
   return x * n;
-
 }
 
 //domyślne  parametry nie liczą sie w index??
 // domyślny nie jest brany pod uwage
+
+// ---------------->        Nazwa funkcji i debugowanie
+// w consoli getName.name mamy dostęp do nazwy funkcji
+//  dzieki name mamy np info pofczas wyrzucenia bledu
+// gdzie jest błąd np.
+//      index.js:7 Uncaught Error: Wystąpił błąd
+//          at getName (index.js:7)  // stack trace - stos wywołań
+//          at <anonymous>:1:1
+//          getName @ index.js:7
+//          (anonymous) @ VM8692:1
+//
+function getName() {
+  throw new Error('Wystąpił błąd');
+  return 'jan';
+}
+let getName = function () {
+  // funkcja anonimowa nie ma dostepu do name ale
+  throw new Error('Wystąpił błąd'); // dzieki deklaracji let getName js juz daje nam dostęp do name
+  return 'jan';
+};
+let newFn = getName.bind(null); // newFn.name = 'bound getName'
+//
+//
+// -------------->   Rest
+//
+// es5
+function calculate(type) {
+  // console.log(arguments); // pseudo tablica - nie jest tablica wiec nie posiada np metody slice
+  let args = [].slice.call(arguments, 1); // nowa tabloca z metoda slice, i call - wywoluje nam fnc(this=arguments)
+  console.log(args); //zwraca tablice
+
+  return args.reduce(
+    (prevVal, val) => prevVal + val // 2+22=24+222 etc
+  );
+}
+console.log(calculate('sum', 2, 22, 222, 2222, 222222));
+// ...rest
+function calculate(type, ...args) {
+  console.log(args);
+  return args.reduce(
+    (prevVal, val) => prevVal + val // 2+22=24+222 etc
+  );
+}
+console.log(calculate('sum', 2, 22, 222, 2222, 222222));
+// 3 przyklad
+
+function calculate(type, ...args) {
+  console.log(args);
+  let calculations = {
+    sum: (prevVal, val) => prevVal + val,
+    multiply: (prevVal, val) => prevVal * val,
+  };
+  return args.reduce(calculations[type]);
+}
+console.log(calculate('sum', 2, 22, 222, 2222, 222222));
+console.log(calculate('multiply', 2, 22, 222, 2222, 222222));
