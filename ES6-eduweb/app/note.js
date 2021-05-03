@@ -481,27 +481,23 @@ console.log(firstName, lastName, position);
 // ---------------> 21. Dekompozycja parametrów funkcji
 //
 function setSliderSpeed({ speed, easing } = {}) {
-
   let slider = {};
 
   slider.speed = speed;
   slider.easing = easing;
 
   console.log(slider);
-
 }
 
 const config = {
   autoPlay: true,
   speed: 500,
   pause: 2000,
-  easing: "linear",
-  infinite: true
+  easing: 'linear',
+  infinite: true,
 };
 
 setSliderSpeed(config);
-
-
 
 //
 //
@@ -519,9 +515,9 @@ setSliderSpeed(config);
 //
 
 let person = {
-  firstName: "Jan",
-  lastName: "Kowalski",
-  age: 49
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+  age: 49,
 };
 
 let { firstName, lastName, age } = person;
@@ -532,7 +528,7 @@ let info = `Imię: ${firstName}, nazwisko: ${lastName}, wiek: ${age} lat.`;
 
 console.log(info);
 
-let buttonText = "Wciśnij mnie!";
+let buttonText = 'Wciśnij mnie!';
 
 // let template = "\
 // <button class='btn'>\
@@ -546,3 +542,89 @@ let template = `
 `;
 
 console.log(template);
+
+// jezeli przed `\${cos}` podamy \ to zignoruje
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 23. Funkcje tagujące
+//
+
+function formatPrice(strings, ...values) {
+  let output = '';
+
+  strings.forEach(function (string, index) {
+    let value = values[index];
+
+    output += string;
+
+    if (value !== undefined) {
+      if (typeof value === 'number') {
+        output += value.toFixed(2) + ' PLN';
+      } else {
+        output += value;
+      }
+    }
+  });
+
+  return output;
+}
+
+let product = {
+  name: 'Płyta DVD',
+  price: 1,
+};
+
+let { name: pName, price: pPrice } = product;
+
+let info = formatPrice`Dodałeś do koszyka produkt: ${pName} w cenie ${pPrice}.`;
+
+console.log(info);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 24. nowe metody dla strings
+//
+
+const URL = 'https://mojastrona.pl';
+const filePath = '/Users/janek/Desktop/app/index.html';
+
+function isHTTPS(text) {
+  // return text.indexOf("https://") === 0;
+  return text.startsWith('https://');
+}
+
+function hasExt(path, ext) {
+  // return (new RegExp("\." + ext + "$")).test(path);
+  return path.endsWith(`.${ext}`);
+}
+
+function includes(text, substring) {
+  // return text.indexOf(substring) !== -1;
+  return text.includes(substring);
+}
+
+console.log(isHTTPS(URL));
+console.log(hasExt(filePath, 'html'));
+console.log(includes('Ala ma kota', 'ma'));
+console.log('='.repeat(10));
