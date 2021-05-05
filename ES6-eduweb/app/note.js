@@ -791,7 +791,7 @@ let col = new Collection(10, 20, 30);
 // ---------------> 28. Metody statyczne
 //
 
-// metody statyczne to metody ktorem mozemy przypisac bezpośrednio do klasy
+// metody statyczne to metody ktore mozemy przypisac bezpośrednio do klasy
 // są bezpośrednio przypisane do klasy,
 class Person {
   constructor(firstName, lastName) {
@@ -949,3 +949,57 @@ let person2 = createInstance(
   'Anna',
   'Nowak'
 );
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 31. symbole
+//
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 30. ciekawostki odnosnie klas
+//
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 30. ciekawostki odnosnie klas
+//
