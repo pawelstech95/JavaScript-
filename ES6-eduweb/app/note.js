@@ -746,3 +746,80 @@ class Employee extends Person {
 }
 
 let employee1 = new Employee('Jan', 'Kowalski', 'programista');
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 27. Dziedziczenie z wbudowanych typow
+//
+
+//collection dziedziczy z array a array nie wie nic o collection
+class Collection extends Array {
+  constructor(...args) {
+    if (args.length === 1) {
+      super(1); // wywolanie konstruktora rodzica
+      this[0] = args[0]; // jezeli w collection podamy tyoko (10)
+    } else { // to w consoli bedzie 10x undefined, dlatego dajemy warunek
+      super(...args);
+    }
+  }
+}
+
+let col = new Collection(10, 20, 30);
+
+
+/
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 28. Metody statyczne
+//
+
+// metody statyczne to metody ktorem mozemy przypisac bezpośrednio do klasy
+// są bezpośrednio przypisane do klasy, 
+class Person {
+
+  constructor(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+  }
+
+  sayHello() {
+      return `${this.firstName} ${this.lastName}`;
+  }
+
+  static create({ fName: firstName, lName: lastName } = {}) {
+      return new Person(firstName, lastName);
+  }
+
+}
+
+let person1 = new Person("Jan", "Kowalski");
+
+let json = `{
+  "fName": "Anna",
+  "lName": "Kowalska"
+}`;
+
+let person2 = Person.create( JSON.parse(json) );
+
+
