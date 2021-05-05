@@ -963,6 +963,86 @@ let person2 = createInstance(
 //
 // ---------------> 31. symbole
 //
+//symbole
+// typ prymitywny tj, number string etc
+// symbol zrtóci cos unikalnego
+// wartosc, nie wiemy jaka ale na pewno jest unikalna
+// metoda prywatna
+// tylko klasa Person ma dostep do tej stalej
+// bo jest zdefiniowana w tym samym zakresie
+//
+
+const hidden = Symbol('ściśle tajne');
+
+let person = {
+  // nie bedzie widoczny przy np petli for in
+  [hidden]: '12312asdf*=9asdf#a12', // [hiden] - wartosc zmienna(podstawiamy symbol)
+};
+// for(let key in person){
+//     console.log(key) --> nic nie zwroci
+// }
+
+// console.log(person[hidden]);
+
+const FORMAT = Symbol('format()');
+
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  sayHello() {
+    return this[FORMAT](`${this.firstName} ${this.lastName}`);
+  }
+
+  [FORMAT](text) {
+    return text.toUpperCase();
+  }
+}
+
+let person1 = new Person('Jan', 'Kowalski');
+
+console.log(person1.sayHello());
+
+
+
+
+
+
+
+
+
+
+// Metody Symboli
+//
+//
+// Symbol.for('hidden') - jezeli nie bylo wczesniej deklaracji i oprzekarzemy string
+// ('hidden') to utworzy nam Symbol w globalnym rejestrze
+// kazde kolejne uzycie [Symbol.for('hidden')] bedzie nam zwracac ten symbol
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// const hidden = Symbol("hidden");
+const hidden = Symbol.for('hidden'); // dzieki temu symbol jest przechowywany w globalnym zakresie
+//
+let person = {
+  [hidden]: '123jkasdKhasdf$901-123',
+  getSecret() {
+    return this[Symbol.for('hidden')];
+  },
+};
+
+console.log(Symbol.keyFor(hidden));
+console.log(Object.getOwnPropertyNames(person));
+console.log(Object.getOwnPropertySymbols(person));
 
 
 
@@ -980,15 +1060,9 @@ let person2 = createInstance(
 //
 //
 //
-// ---------------> 30. ciekawostki odnosnie klas
+// ---------------> 
 //
 
-
-
-
-
-
-
 //
 //
 //
@@ -1001,5 +1075,5 @@ let person2 = createInstance(
 //
 //
 //
-// ---------------> 30. ciekawostki odnosnie klas
+// ---------------> 
 //
