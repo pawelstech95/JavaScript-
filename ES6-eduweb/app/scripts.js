@@ -1,54 +1,28 @@
-// function Person(firstName, lastName) {
-//     this.firstName = firstName;
-//     this.lastName = lastName;
-// }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 27. Dziedziczenie z wbudowanych typow
+//
 
-// Person.prototype.sayHello = function() {
-//     return this.firstName + " " + this.lastName;
-// };
-
-// function Employee(firstName, lastName, position) {
-//     Person.call(this, firstName, lastName);
-//     this.position = position;
-// }
-
-// Employee.prototype = Object.create(Person.prototype);
-// Employee.prototype.constructor = Employee;
-
-// Employee.prototype.sayHello = function() {
-//     var name = Person.prototype.sayHello.call(this);
-
-//     return "Nazywam się " + name + " i pracuję jako " + this.position + ".";
-// };
-
-// var employee1 = new Employee("Jan", "Kowalski", "programista");
-
-// console.log( employee1.sayHello() );
-
-class Person {
-  constructor(firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  sayHello() {
-    return `${this.firstName} ${this.lastName}`;
+//collection dziedziczy z array a array nie wie nic o collection
+class Collection extends Array {
+  constructor(...args) {
+    if (args.length === 1) {
+      super(1); // wywolanie konstruktora rodzica
+      this[0] = args[0];
+    } else {
+      super(...args);
+    }
   }
 }
 
-class Employee extends Person {
-  // constructor(...args) {
-  //     super(...args);
-  // }
-
-  constructor(firstName, lastName, position) {
-    super(firstName, lastName); // konstructor kl nadrzednej czyli Person constructor
-    this.position = position; // jest wywolywana i this jest ustawione na nowo utworzony obiekt
-  }
-
-  sayHello() {
-    return `Nazywam się ${super.sayHello()} i pracuję jako ${this.position}.`;
-  }
-}
-
-let employee1 = new Employee('Jan', 'Kowalski', 'programista');
+let col = new Collection(10, 20, 30);
