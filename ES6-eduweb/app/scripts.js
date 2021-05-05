@@ -7,11 +7,25 @@
 //     return this.firstName + " " + this.lastName;
 // };
 
+// function Employee(firstName, lastName, position) {
+//     Person.call(this, firstName, lastName);
+//     this.position = position;
+// }
+
+// Employee.prototype = Object.create(Person.prototype);
+// Employee.prototype.constructor = Employee;
+
+// Employee.prototype.sayHello = function() {
+//     var name = Person.prototype.sayHello.call(this);
+
+//     return "Nazywam się " + name + " i pracuję jako " + this.position + ".";
+// };
+
+// var employee1 = new Employee("Jan", "Kowalski", "programista");
+
+// console.log( employee1.sayHello() );
+
 class Person {
-  // funkcje sa hoistowane a klasy NIE
-  // musimy dodac klase wyzej
-  // klasy nie sa tez dodawane jako elem, obiektu window
-  //
   constructor(firstName, lastName) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -22,6 +36,19 @@ class Person {
   }
 }
 
-var person1 = new Person('Jan', 'Kowalski');
+class Employee extends Person {
+  // constructor(...args) {
+  //     super(...args);
+  // }
 
-console.log(person1.sayHello());
+  constructor(firstName, lastName, position) {
+    super(firstName, lastName); // konstructor kl nadrzednej czyli Person constructor
+    this.position = position; // jest wywolywana i this jest ustawione na nowo utworzony obiekt
+  }
+
+  sayHello() {
+    return `Nazywam się ${super.sayHello()} i pracuję jako ${this.position}.`;
+  }
+}
+
+let employee1 = new Employee('Jan', 'Kowalski', 'programista');
