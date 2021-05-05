@@ -591,6 +591,10 @@ let info = formatPrice`Dodałeś do koszyka produkt: ${pName} w cenie ${pPrice}.
 
 console.log(info);
 
+// Do funkcji takiej automatycznie są przekazywane w pierwszym parametrze poszczególne
+//  części template string (znajdujące się między zmiennymi),
+// a do kolejnych parametrów zostaną przekazane kolejne zmienne użyte wewnątrz tekstu.
+
 //
 //
 //
@@ -628,3 +632,20 @@ console.log(isHTTPS(URL));
 console.log(hasExt(filePath, 'html'));
 console.log(includes('Ala ma kota', 'ma'));
 console.log('='.repeat(10));
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 25. Tworzenie klas
+//
+
