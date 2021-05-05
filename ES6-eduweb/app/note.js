@@ -1004,17 +1004,11 @@ class Person {
 let person1 = new Person('Jan', 'Kowalski');
 
 console.log(person1.sayHello());
-
-
-
-
-
-
-
-
-
-
-// Metody Symboli
+//
+//
+//
+//
+//   ------------>                Metody Symboli
 //
 //
 // Symbol.for('hidden') - jezeli nie bylo wczesniej deklaracji i oprzekarzemy string
@@ -1044,9 +1038,83 @@ console.log(Symbol.keyFor(hidden));
 console.log(Object.getOwnPropertyNames(person));
 console.log(Object.getOwnPropertySymbols(person));
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 33. symbole wbudowane
+//
+/*
 
+- Symbol.hasInstance - 
+- Symbol.toPrimitive
+- Symbol.toStringTag
+- Symbol.isConcatSpreadable
+- Symbol.species
+- Symbol.match, Symbol.replace, Symbol.search, Symbol.split
+- Symbol.unscopables
+- Symbol.iterator
 
+*/
 
+class Person {
+  constructor(firstName, lastName) {
+    if (new.target === Person) {
+      throw new Error('Klasa Person nie może być użyta bezpośrednio.');
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  sayHello() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  static [Symbol.hasInstance](obj) {
+    //  sprawdzi czy na klanie person[1*]
+    return false; // czy istnieje metoda, jezeli tak to przekaze to cp jest po lewej str instanceOf
+  } // bez static zostalo by dodane do prototypu i nie bd dzialac
+
+  get [Symbol.toStringTag]() {
+    // zamiast [object, object] zwroci person
+    return 'Person';
+  }
+
+  [Symbol.toPrimitive]() {
+    // zamiast  [object, object]
+    return this.sayHello(); // zwroci sayHello()
+  }
+}
+
+class Employee extends Person {
+  constructor(firstName, lastName, position) {
+    super(firstName, lastName);
+    this.position = position;
+  }
+
+  sayHello() {
+    return `Nazywam się ${super.sayHello()} i pracuję jako ${this.position}.`;
+  }
+
+  static [Symbol.hasInstance](obj) {
+    return obj.constructor === Employee;
+  }
+}
+
+let employee1 = new Employee('Jan', 'Kowalski', 'programista');
+
+console.log(employee1 instanceof Person); //[1*]
+
+console.log('Obiekt to ' + employee1);
 
 //
 //
@@ -1060,7 +1128,7 @@ console.log(Object.getOwnPropertySymbols(person));
 //
 //
 //
-// ---------------> 
+// --------------->
 //
 
 //
@@ -1075,5 +1143,50 @@ console.log(Object.getOwnPropertySymbols(person));
 //
 //
 //
-// ---------------> 
+// --------------->
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
 //
