@@ -633,7 +633,6 @@ console.log(hasExt(filePath, 'html'));
 console.log(includes('Ala ma kota', 'ma'));
 console.log('='.repeat(10));
 
-
 //
 //
 //
@@ -747,8 +746,6 @@ class Employee extends Person {
 
 let employee1 = new Employee('Jan', 'Kowalski', 'programista');
 
-
-
 //
 //
 //
@@ -770,7 +767,8 @@ class Collection extends Array {
     if (args.length === 1) {
       super(1); // wywolanie konstruktora rodzica
       this[0] = args[0]; // jezeli w collection podamy tyoko (10)
-    } else { // to w consoli bedzie 10x undefined, dlatego dajemy warunek
+    } else {
+      // to w consoli bedzie 10x undefined, dlatego dajemy warunek
       super(...args);
     }
   }
@@ -778,8 +776,7 @@ class Collection extends Array {
 
 let col = new Collection(10, 20, 30);
 
-
-/
+//
 //
 //
 //
@@ -795,31 +792,160 @@ let col = new Collection(10, 20, 30);
 //
 
 // metody statyczne to metody ktorem mozemy przypisac bezpośrednio do klasy
-// są bezpośrednio przypisane do klasy, 
+// są bezpośrednio przypisane do klasy,
 class Person {
-
   constructor(firstName, lastName) {
-      this.firstName = firstName;
-      this.lastName = lastName;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   sayHello() {
-      return `${this.firstName} ${this.lastName}`;
+    return `${this.firstName} ${this.lastName}`;
   }
 
   static create({ fName: firstName, lName: lastName } = {}) {
-      return new Person(firstName, lastName);
+    return new Person(firstName, lastName);
   }
-
 }
 
-let person1 = new Person("Jan", "Kowalski");
+let person1 = new Person('Jan', 'Kowalski');
 
 let json = `{
   "fName": "Anna",
   "lName": "Kowalska"
 }`;
 
-let person2 = Person.create( JSON.parse(json) );
+let person2 = Person.create(JSON.parse(json));
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 29. uzycie super na obiektach
+//
 
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  sayHello() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  static inherit(obj) {
+    //
+    return Object.setPrototypeOf(obj, Person.prototype);
+  }
+}
+
+const employee1 = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+  position: 'programista',
+  sayHello() {
+    // let name = Object.getPrototypeOf(this).sayHello.call(this);
+
+    return `Nazywam się ${super.sayHello()} i pracuję jako ${this.position}`;
+  }, // z super() mozemy korzystac wewnatrz funkcji w obiektach
+}; // tylko ze obiekt musi miec ustawiony jakis prototyp
+// mozemy uzyc tylko skroconego zapisu funkcji
+Person.inherit(employee1);
+
+// Object.setPrototypeOf(employee1, Person.prototype);
+
+// console.log( Person.prototype.sayHello.call(employee1) );
+
+console.log(employee1.sayHello());
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 30. ciekawostki odnosnie klas
+//
+// wewnatrz klas zawsze korzystamy z 'strict mode'
+// mozna dziedziczyc ze zwyklych funkcji, pod waruniem ze nie sa to arrow function
+
+// function Person(firstName, lastName) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+// }
+
+// Object.defineProperty(Person.prototype, "sayHello", {
+//     enumerable: false,
+//     value: function() {
+//         return this.firstName + " " + this.lastName;
+//     }
+// });
+
+// Person.prototype.sayHello = function() {
+//     return this.firstName + " " + this.lastName;
+// };
+
+class Person {
+  constructor(firstName, lastName) {
+    if (new.target === Person) {
+      throw new Error('Klasy Person nie można używać bezpośrednio.');
+    }
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  sayHello() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+class Employee extends Person {
+  constructor(firstName, lastName, position) {
+    super(firstName, lastName);
+    this.position = position;
+  }
+
+  sayHello() {
+    return `Nazywam się ${super.sayHello()} i pracuję jako ${this.position}.`;
+  }
+}
+
+// var person1 = new Person("Jan", "Kowalski");
+var employee1 = new Employee('Jan', 'Kowalski', 'programista');
+
+// let person1 = new Person("Jan", "Kowalski");
+
+// for(let key in person1) {
+//     console.log(key);
+// }
+
+function createInstance(fromClass, ...args) {
+  return new fromClass(...args);
+}
+
+let person2 = createInstance(
+  class {
+    constructor(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+  },
+  'Anna',
+  'Nowak'
+);
