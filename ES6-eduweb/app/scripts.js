@@ -1,67 +1,39 @@
-class Model {
+// // jezeli wywolamy funkcje  generatora i ja wywolamy
+// // to zwroci ona  iterator
+// // czyli iterator zawiera juz metode next()
 
-    constructor(data = {}) {
-        this.data = data;
+// function* it() {
+//   // yield 1 // value 1, done false / pauza
+//   // yield 2 // pozwala zrobic pauze nwet na petlach
+//   // yield 3
+//   for (let i = 1; i <= 50; i++) {
+//     yield i;
+//   }
+// }
+// let iterator = it();
+// // console.log(iterator.next())
+
+let it = {
+  *[Symbol.iterator]() {
+    // symbol i genmerator - nie wymaga next i ma yield
+    let numbers = [1, 2, 3, 4, 5];
+    for (let number of numbers) {
+      yield number;
     }
+  },
+};
 
-    get(prop) {
-        return this.data[prop];
-    }
-
-    set(prop, value) {
-        this.data[prop] = value;
-    }
-
+for (let value of it) {
+  console.log(value);
 }
-
-class Collection {
-
-    constructor(models) {
-
-        this.models = [];
-
-        if( Collection.hasIterator(models) ) {
-            this.populate(models);
-        }
-
-    }
-
-    populate(models) {
-
-        for(let model of models) {
-            this.models.push( new Model(model) );
-        }
-
-    }
-
-    [Symbol.iterator]() {
-        var models = this.models,
-            index = 0;
-
-        return {
-            next: function() {
-                return {
-                    done: (index === models.length) ? true : false,
-                    value: models[index++]
-                };
-            }
-        };
-    }
-
-    static hasIterator(obj) {
-        return obj && typeof obj[Symbol.iterator] === "function";
-    }
-
+//
+//
+function* range(from, to) {
+  let i = from;
+  while (i <= to) {
+    yield i++;
+  }
 }
-
-const USERS = window.USERS;
-
-let users = new Collection(USERS);
-
-[...users]
-    .filter(user => user.get("email").endsWith(".biz"))
-    .forEach(user => user.set("email", user.get("email").replace(".biz", ".org")));
-
-for(let user of users) {
-    console.log(user.get("email"));
+for (let value of range(2, 13)) {
+  console.log(value);
 }
