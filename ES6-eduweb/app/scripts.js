@@ -1,39 +1,40 @@
-// // jezeli wywolamy funkcje  generatora i ja wywolamy
-// // to zwroci ona  iterator
-// // czyli iterator zawiera juz metode next()
-
-// function* it() {
-//   // yield 1 // value 1, done false / pauza
-//   // yield 2 // pozwala zrobic pauze nwet na petlach
-//   // yield 3
-//   for (let i = 1; i <= 50; i++) {
-//     yield i;
-//   }
-// }
-// let iterator = it();
-// // console.log(iterator.next())
-
-let it = {
-  *[Symbol.iterator]() {
-    // symbol i genmerator - nie wymaga next i ma yield
-    let numbers = [1, 2, 3, 4, 5];
-    for (let number of numbers) {
-      yield number;
-    }
-  },
-};
-
-for (let value of it) {
-  console.log(value);
+//example 1
+function* it(number) {
+  let result = (yield) + number * 2; // yield bez () = 10 // z ()undefined
+  console.log('druga linijka');
+  yield result;
 }
-//
-//
-function* range(from, to) {
-  let i = from;
-  while (i <= to) {
-    yield i++;
-  }
+let iterator = it(5);
+
+console.log(iterator.next());
+console.log(iterator.next(2)); // 2 wpada pod (yield)
+//example 2
+
+function ajax(url) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.open('GET', url);
+  return xhr;
 }
-for (let value of range(2, 13)) {
-  console.log(value);
+function* showData(url) {
+  let result = yield ajax(url);
+  document.querySelector('.lesson39').textContent = result;
 }
+
+function makeRequest(url, gen) {
+
+    let it = gen(url);
+
+    let xhr = it.next().value;
+
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            it.next(xhr.responseText);
+        }
+    };
+
+    xhr.send();
+
+}
+
+makeRequest("http://code.eduweb.pl/kurs-es6/json/", showData);

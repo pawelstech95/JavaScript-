@@ -29,20 +29,3 @@ function *showData(url) {
 
 }
 
-function makeRequest(url, gen) {
-
-    let it = gen(url);
-
-    let xhr = it.next().value;
-
-    xhr.onload = function() {
-        if(xhr.status === 200) {
-            it.next(xhr.responseText);
-        }
-    };
-
-    xhr.send();
-
-}
-
-makeRequest("http://code.eduweb.pl/kurs-es6/json/", showData);
