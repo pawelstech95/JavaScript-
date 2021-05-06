@@ -1157,25 +1157,77 @@ for (let o = iterator.next(); o.done !== true; iterator.next()) {
 //
 //
 //
+//ES6
+let it = {
+  [Symbol.iterator]() {
+    let numbers = [1, 2, 3, 4, 5],
+      index = 0;
+    return {
+      next: function () {
+        return {
+          done: index === numbers.length ? true : false,
+          value: numbers[index++],
+        };
+      },
+    };
+  },
+};
 
+let iterator = it[Symbol.iterator]();
 
+for (let value of it) {
+  console.log(value);
+}
+for (let ch of 'Paweł') {
+  console.log(ch);
+}
+var lis = document.querySelectorAll('.app ul li');
+for (let li of lis) {
+  li.style.color = '#ff0000';
+}
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->36. Operator spread na iteratorach
+//
+let numbers = [12, 3, 9, 22, 11, 6];
 
+let it = {
+  [Symbol.iterator]() {
+    var numbers = [1, 2, 3, 4, 5],
+      index = 0;
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
+    return {
+      next: function () {
+        return {
+          done: index === numbers.length ? true : false,
+          value: numbers[index++],
+        };
+      },
+    };
+  },
+};
+
+// console.log( Math.max(...numbers) );
+console.log(Math.max(...it));
+console.log([...it]);
+console.log([...'Paweł']);
+
+var lis = document.querySelectorAll('.app ul li');
+
+[...lis]
+  .filter((li) => li.textContent.includes('2'))
+  .forEach((li) => (li.style.fontWeight = 'bold'));
 
 //
 //
