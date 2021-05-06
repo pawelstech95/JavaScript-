@@ -1241,7 +1241,7 @@ var lis = document.querySelectorAll('.app ul li');
 //
 //
 //
-// --------------->
+// ---------------> 37. Dodawanie iteratora do klasy
 //
 
 //
