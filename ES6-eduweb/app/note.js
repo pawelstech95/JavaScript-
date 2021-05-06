@@ -1128,8 +1128,39 @@ console.log('Obiekt to ' + employee1);
 //
 //
 //
-// --------------->
+// --------------->    Tworzenie iteratorów
 //
+// ES5
+const it = function () {
+  let numbers = [1, 2, 3, 4, 5],
+    index = 0;
+  return {
+    next: function () {
+      return {
+        done: index === numbers.length ? true : false,
+        value: numbers[index++],
+      };
+    },
+  };
+};
+
+let iterator = it();
+
+// console.log(iterator.next());
+
+for (let o = iterator.next(); o.done !== true; iterator.next()) {
+  console.log(o);
+}
+//
+//
+//
+//
+//
+//
+
+
+
+
 
 //
 //
