@@ -1373,3 +1373,249 @@ for (let value of range(2, 13)) {
 //
 // ---------------> 39. Przekazywanie wartośc
 //
+//example 1
+function* it(number) {
+  let result = (yield) + number * 2; // yield bez () = 10 // z ()undefined
+  console.log('druga linijka');
+  yield result;
+}
+let iterator = it(5);
+
+console.log(iterator.next());
+console.log(iterator.next(2)); // 2 wpada pod (yield)
+//example 2
+
+function ajax(url) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.open('GET', url);
+  return xhr;
+}
+function* showData(url) {
+  let result = yield ajax(url);
+  document.querySelector('.lesson39').textContent = result;
+}
+
+function makeRequest(url, gen) {
+  let it = gen(url);
+
+  let xhr = it.next().value;
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      it.next(xhr.responseText);
+    }
+  };
+
+  xhr.send();
+}
+
+makeRequest('http://code.eduweb.pl/kurs-es6/json/', showData);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 40 obsługa błędów
+//
+
+function ajax(url) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.open('GET', url);
+
+  return xhr;
+}
+
+function makeRequest(url, gen) {
+  let it = gen(url);
+
+  let xhr = it.next().value;
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      it.next(xhr.responseText);
+    }
+  };
+
+  xhr.onerror = function () {
+    it.throw(new Error('Wystąpił błąd'));
+  };
+
+  xhr.send();
+}
+
+function* showData(url) {
+  let output = document.querySelector('#pre-36');
+
+  try {
+    let result = yield ajax(url);
+    output.textContent = result;
+  } catch (e) {
+    output.textContent = e.message;
+  }
+}
+
+makeRequest('ttp://code.eduweb.pl/kurs-es6/json/', showData);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> zwracanie z generatora
+//
+function* getRandom() {
+  while (true) {
+    yield Math.floor(Math.random() * 100) + 1;
+  }
+}
+
+let iterator = getRandom();
+let randomNumbers = [];
+
+for (let number of iterator) {
+  randomNumbers.push(number);
+
+  if (randomNumbers.length === 10) {
+    iterator.return();
+  }
+}
+
+console.log(randomNumbers);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->42. delegowanie generatorow
+//
+// function *gen() {
+
+//     yield 1;
+//     yield *[2, 3, 4]; // delegowanie - zsroc wszystko po kolei
+//     yield 5;
+
+// }
+
+// for(let value of gen()) {
+//     console.log(value);
+// }
+
+class Model {
+  constructor(data = {}) {
+    this.data = data;
+  }
+
+  get(prop) {
+    return this.data[prop];
+  }
+
+  set(prop, value) {
+    this.data[prop] = value;
+  }
+}
+
+class Collection {
+  constructor(models) {
+    this.models = [];
+
+    if (Collection.hasIterator(models)) {
+      this.populate(models);
+    }
+  }
+
+  populate(models) {
+    for (let model of models) {
+      this.models.push(new Model(model));
+    }
+  }
+
+  static hasIterator(obj) {
+    return obj && typeof obj[Symbol.iterator] === 'function';
+  }
+
+  *[Symbol.iterator]() {
+    yield* this.models;
+  }
+}
+
+const USERS = window.USERS;
+
+let users = new Collection(USERS);
+
+[...users]
+  .filter((user) => user.get('email').endsWith('.biz'))
+  .forEach((user) =>
+    user.set('email', user.get('email').replace('.biz', '.org'))
+  );
+
+for (let user of users) {
+  console.log(user.get('name'), `@${user.get('email')}`);
+}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
