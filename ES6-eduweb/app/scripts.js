@@ -26,9 +26,16 @@ function getJSON(url) {
   return p;
 }
 
-$('#btn-39').onclick = function () {
-  getJSON('ttp://code.eduweb.pl/kurs-es6/json/').then(
-    (json) => ($('#pre-39').textContent = json),
-    (err) => ($('#pre-39').textContent = err.message)
-  );
+$('#btn-40').onclick = function () {
+  getJSON('http://code.eduweb.pl/kurs-es6/json/')
+    .then((json) => {
+      $('#pre-40').textContent = json;
+      // return JSON.parse(json);
+      return getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1');
+    })
+    .then((obj) => {
+      console.log(obj);
+      // throw new Error("Wystąpił inny błąd");
+    })
+    .catch((err) => ($('#pre-40').textContent = err.message));
 };
