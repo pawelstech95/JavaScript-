@@ -1,8 +1,14 @@
+const CACHE = {};
+
 function $(selector) {
   return document.querySelector(selector);
 }
 
 function getJSON(url) {
+  if (CACHE[url] !== undefined) {
+    console.log('zwracam dane z pamieci podrecznej');
+    return Promise.resolve(CACHE[url]);
+  }
   let xhr = new XMLHttpRequest();
 
   xhr.open('GET', url);
