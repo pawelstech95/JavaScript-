@@ -1558,7 +1558,7 @@ class Collection {
   }
 
   *[Symbol.iterator]() {
-    yield* this.models;
+    yield* this.models; // delegowanie, musi przeleciec wszystko w srodku
   }
 }
 
@@ -1587,7 +1587,7 @@ for (let user of users) {
 //
 //
 //
-// --------------->
+// ---------------> 43. korzystanie z promise
 //
 
 //
