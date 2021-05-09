@@ -1589,6 +1589,118 @@ for (let user of users) {
 //
 // ---------------> 43. korzystanie z promise
 //
+// example Promise
+
+// czesc I
+$('#btn-40').onclick = function () {
+  getJSON('http://code.eduweb.pl/kurs-es6/json/')
+    .then((json) => {
+      $('#pre-40').textContent = json;
+      // return JSON.parse(json);
+      return getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1');
+    })
+    .then((obj) => {
+      console.log(obj);
+      // throw new Error("Wystąpił inny błąd");
+    })
+    .catch((err) => ($('#pre-40').textContent = err.message));
+};
+
+// Praca z wieloma promisami
+
+$('#btn-42').onclick = function () {
+  Promise.all([
+    getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
+    getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), // data[1]
+  ])
+    .then((data) => {
+      $('#pre-42').textContent = `${data[0]}\n\n${'='.repeat(70)}${data[1]}`;
+    })
+    .catch((err) => ($('#pre-42').textContent = err.message));
+};
+// example
+              // Promise.race([
+              //   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
+              //   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), // data[1]
+              // ]).then(json => ${'#pre-42'}.textContent = json)
+              // .catch((err) => ($('#pre-42').textContent = err.message));
+              // // example
+              // Promise.race([
+              //     getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
+              //     timeout(300)
+              //   ]).then(json => ($('#pre-42').textContent = json));
+              //   .catch((err) => ($('#pre-42').textContent = err.message));
+
+////////////////////////////////////////////////////////////////////////////////////
+
+function $(selector) {
+  return document.querySelector(selector);
+}
+
+function getJSON(url) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.open('GET', url);
+
+  let p = new Promise(function (resolve, reject) {
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        resolve(xhr.responseText);
+      } else {
+        reject(new Error('Wystąpił błąd'));
+      }
+    };
+
+    xhr.onerror = function () {
+      reject(new Error('Wystapił błąd'));
+    };
+  });
+
+  xhr.send();
+
+  return p;
+}
+
+function run(gen, ...args) {
+  let it = gen(...args),
+    result;
+
+  function next(value) {
+    result = it.next(value);
+
+    if (!result.done) {
+      if (typeof result.value.then === 'function') {
+        result.value.then(next);
+      }
+    }
+  }
+
+  next();
+}
+
+$('#btn-43').onclick = function () {
+  run(function* (url) {
+    let json = yield getJSON(url);
+    let json2 = yield getJSON(url + '?shuffle=1');
+
+    $('#pre-43').textContent = `${json}\n\n${'='.repeat(70)}\n\n${json2}`;
+  }, 'http://code.eduweb.pl/kurs-es6/json/');
+};
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> 
+//
 
 //
 //
@@ -1604,6 +1716,58 @@ for (let user of users) {
 //
 // --------------->
 //
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// --------------->
+//
+
+
 
 //
 //

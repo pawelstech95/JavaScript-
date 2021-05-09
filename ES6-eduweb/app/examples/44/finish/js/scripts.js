@@ -1,14 +1,3 @@
-let person1 = {
-    firstName: "Jan",
-    lastName: "Kowalski"
-};
-
-let person2 = {
-    firstName: "Anna",
-    lastName: "Nowak"
-};
-
-let s = new Set([person1, person2]);
 
 // s.add("Piotr");
 // s.add("Anna");
