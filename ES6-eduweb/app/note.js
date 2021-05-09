@@ -1619,17 +1619,17 @@ $('#btn-42').onclick = function () {
     .catch((err) => ($('#pre-42').textContent = err.message));
 };
 // example
-              // Promise.race([
-              //   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
-              //   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), // data[1]
-              // ]).then(json => ${'#pre-42'}.textContent = json)
-              // .catch((err) => ($('#pre-42').textContent = err.message));
-              // // example
-              // Promise.race([
-              //     getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
-              //     timeout(300)
-              //   ]).then(json => ($('#pre-42').textContent = json));
-              //   .catch((err) => ($('#pre-42').textContent = err.message));
+// Promise.race([
+//   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
+//   getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), // data[1]
+// ]).then(json => ${'#pre-42'}.textContent = json)
+// .catch((err) => ($('#pre-42').textContent = err.message));
+// // example
+// Promise.race([
+//     getJSON('http://code.eduweb.pl/kurs-es6/json/?shuffle=1'), //data[0]
+//     timeout(300)
+//   ]).then(json => ($('#pre-42').textContent = json));
+//   .catch((err) => ($('#pre-42').textContent = err.message));
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -1727,9 +1727,9 @@ s1.forEach((value) => console.log(value));
 let numbers = [1, 2, 3, 2, 3, 1, 1, 3, 4, 4, 3, 6, 7, 8];
 
 function removeDuplicate(arr) {
-  return [...(new Set(arr))];
+  return [...new Set(arr)];
 }
-console.log(removeDuplicate(numbers))
+console.log(removeDuplicate(numbers));
 
 //
 //
@@ -1746,6 +1746,84 @@ console.log(removeDuplicate(numbers))
 // ---------------> 49. weakSet
 //
 
+let person1 = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+};
+
+let person2 = {
+  firstName: 'Anna',
+  lastName: 'Nowak',
+};
+
+let s = new WeakSet();
+
+s.add(person1);
+s.add(person2);
+// weakSet nie jest iteratorem
+// nie mozemy dodac wszystkiego np string
+// mozna dodawac tylko obiekty
+// czyli nie mozna dodawac wartosci prymitywnych
+// jezeli cos dodamy i pozniej stracimy referencje to jest on usuwany
+// z weaksetu,
+person1 = null;
+// garbage colector usuwa namperson 1 poniewaz zrobilismy weakSet
+function fn() {
+  let z = 1;
+}
+fn(); // nie uzylismy z to nam to usunelo
+s.has(person1); //null
+let person3 = person1;
+console.log(s.has(person3)); // pamieta referencje
+
+// example weakSet
+const people = new WeakSet();
+
+class Person {
+  constructor(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    people.add(this);
+  }
+
+  sayHello() {
+    if (!people.has(this)) {
+      throw new TypeError(
+        'Person.prototype.sayHello wywołana na niekompatybilnym obiekcie'
+      );
+    }
+
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+
+let person4 = new Person('Jan', 'Kowalski');
+
+console.log(person4.sayHello());
+
+person4 = null;
+
+let person5 = {
+  firstName: 'Anna',
+  lastName: 'Nowak',
+};
+
+console.log(Person.prototype.sayHello.call(person5));
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> Map
+//
 
 let person1 = {
   firstName: 'Jan',
@@ -1757,78 +1835,28 @@ let person2 = {
   lastName: 'Nowak',
 };
 
-let s = new WeakSet()
+let age = new Map([
+  [person1, 32],
+  [person2, 22],
+]);
 
-s.add(person1)
-s.add(person2)
-// weakSet nie jest iteratorem
-// nie mozemy dodac wszystkiego np string
-// mozna dodawac tylko obiekty
-// czyli nie mozna dodawac wartosci prymitywnych
-// jezeli cos dodamy i pozniej stracimy referencje to jest on usuwany
-// z weaksetu, 
-person1 = null; 
-// garbage colector usuwa namperson 1 poniewaz zrobilismy weakSet
-function fn(){
-    let z = 1;
-}
-fn() // nie uzylismy z to nam to usunelo
-s.has(person1)//null
-let person3 = person1; 
-console.log(s.has(person3)) // pamieta referencje
+age.set(person1, 100);
 
-// example weakSet
-const people = new WeakSet();
+// age.set(person1, 32);
+// age.set(person2, 22);
 
-class Person {
-    constructor(firstName, lastName) {
+// console.log( age.get(person1) );
 
-        this.firstName = firstName;
-        this.lastName = lastName;
-
-        people.add(this);
-
-    }
-
-    sayHello() {
-
-        if ( !people.has(this) ) {
-            throw new TypeError("Person.prototype.sayHello wywołana na niekompatybilnym obiekcie");
-        }
-
-        return `${this.firstName} ${this.lastName}`;
-
-    }
+for (let value of age.values()) {
+  console.log(value);
 }
 
-let person4 = new Person("Jan", "Kowalski");
+// let map = new Map();
 
-console.log( person4.sayHello() );
+// map.set("Jan", "Kowalski");
+// map.set("Anna", "Nowak");
 
-person4 = null;
-
-let person5 = {
-    firstName: "Anna",
-    lastName: "Nowak"
-};
-
-console.log( Person.prototype.sayHello.call(person5) );
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
-
-
+// console.log( map.get("Anna") );
 
 //
 //
@@ -1845,8 +1873,6 @@ console.log( Person.prototype.sayHello.call(person5) );
 // --------------->
 //
 
-
-
 //
 //
 //
@@ -1861,8 +1887,6 @@ console.log( Person.prototype.sayHello.call(person5) );
 //
 // --------------->
 //
-
-
 
 //
 //
