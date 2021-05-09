@@ -1699,8 +1699,37 @@ $('#btn-43').onclick = function () {
 //
 //
 //
-// ---------------> 
+// ---------------> Set
 //
+// podobne do tablicy - pod jedna zmienna mozemy przechowywac wiele danyc
+//
+//
+let s = new Set(); // 4/5 metod posiada - add delete has clear + size
+s.add('Piotr');
+s.add('Anna');
+//dane musza byc unikalne i nie moga sie powtarzac
+s.delete('Piotr');
+
+let person1 = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+};
+
+let person2 = {
+  firstName: 'Anna',
+  lastName: 'Nowak',
+};
+
+let s1 = new Set([person1, person2]);
+
+s1.forEach((value) => console.log(value));
+
+let numbers = [1, 2, 3, 2, 3, 1, 1, 3, 4, 4, 3, 6, 7, 8];
+
+function removeDuplicate(arr) {
+  return [...(new Set(arr))];
+}
+console.log(removeDuplicate(numbers))
 
 //
 //
@@ -1714,10 +1743,76 @@ $('#btn-43').onclick = function () {
 //
 //
 //
-// --------------->
+// ---------------> 49. weakSet
 //
 
 
+let person1 = {
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+};
+
+let person2 = {
+  firstName: 'Anna',
+  lastName: 'Nowak',
+};
+
+let s = new WeakSet()
+
+s.add(person1)
+s.add(person2)
+// weakSet nie jest iteratorem
+// nie mozemy dodac wszystkiego np string
+// mozna dodawac tylko obiekty
+// czyli nie mozna dodawac wartosci prymitywnych
+// jezeli cos dodamy i pozniej stracimy referencje to jest on usuwany
+// z weaksetu, 
+person1 = null; 
+// garbage colector usuwa namperson 1 poniewaz zrobilismy weakSet
+function fn(){
+    let z = 1;
+}
+fn() // nie uzylismy z to nam to usunelo
+s.has(person1)//null
+let person3 = person1; 
+console.log(s.has(person3)) // pamieta referencje
+
+// example weakSet
+const people = new WeakSet();
+
+class Person {
+    constructor(firstName, lastName) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+        people.add(this);
+
+    }
+
+    sayHello() {
+
+        if ( !people.has(this) ) {
+            throw new TypeError("Person.prototype.sayHello wywołana na niekompatybilnym obiekcie");
+        }
+
+        return `${this.firstName} ${this.lastName}`;
+
+    }
+}
+
+let person4 = new Person("Jan", "Kowalski");
+
+console.log( person4.sayHello() );
+
+person4 = null;
+
+let person5 = {
+    firstName: "Anna",
+    lastName: "Nowak"
+};
+
+console.log( Person.prototype.sayHello.call(person5) );
 //
 //
 //
