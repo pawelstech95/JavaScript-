@@ -1,3 +1,4 @@
+import eQuery from './Library/eQuery.js';
 import { isSelector, isHTMLTag, isDOMNode } from './Utils/Check.js';
 import { findElements, createElement } from './Utils/Element.js';
 function init(param) {
@@ -10,9 +11,13 @@ function init(param) {
   } else if (isDOMNode(param)) {
     nodes = param;
   }
+  return eQuery.create(nodes);
 }
 
 window.eQuery = init; // przypisujemy funkcje jako globalna
-init('li')
-console.log(init())
+init('li');
+console.log(init);
+
+//
+//
 // let lis = eQuerry('li');
