@@ -1931,52 +1931,182 @@ person3 = null;
 // ---------------> Get i Set
 //
 var person = {
-  firstName: "Jan",
-  lastName: "Kowalski",
-  _age: 32
+  firstName: 'Jan',
+  lastName: 'Kowalski',
+  _age: 32,
 };
 
 let proxy = new Proxy(person, {
-
   get(target, property, receiver) {
-      // console.log(target);
-      // console.log(property);
-      // console.log(receiver);
+    // console.log(target);
+    // console.log(property);
+    // console.log(receiver);
 
-      if(property.charAt(0) === "_") {
-          return undefined;
-      }
+    if (property.charAt(0) === '_') {
+      return undefined;
+    }
 
-      return Reflect.get(target, property, receiver);
-  }
-
+    return Reflect.get(target, property, receiver);
+  },
 });
 //////// Proxy API
 ////////
 
 class Person {
-
   constructor(firstName, lastName) {
-      this.firstName = firstName;
-      this.lastName = lastName;
+    this.firstName = firstName;
+    this.lastName = lastName;
   }
 
   sayHello() {
-      return `${this.firstName} ${this.lastName}`;
+    return `${this.firstName} ${this.lastName}`;
   }
-
 }
 
 const PersonProxy = new Proxy(Person, {
-
   apply(target, thisArg, argumentsList) {
-      return new target(...argumentsList);
-  }
-
+    return new target(...argumentsList);
+  },
 });
 
-let person = PersonProxy("Jan", "Kowalski");
+let person = PersonProxy('Jan', 'Kowalski');
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> nowosci w tablicach
+//
+
+let arr1 = new Array(10); // 10x undefined
+let arr2 = Array.of(10); // 10
+
+let lis = Array.from(document.querySelectorAll('.div ul li'));
+console.log(lis);
+let numbers = [1, 2, 3, 4, 5];
+numbers.fill(1); // wypelnic cala tablice 1,1,1,1,1
+console.log(numbers);
+numbers.fill(1, 2, 4); // wypełnij 1 zacznij od index 2uzupełniaj do index 4
+
+let names = ['Piotr', 'Anna', 'Jan', 'Katarzyna'];
+
+let women = names.find((value) => value.endsWith('a'));
+
+console.log(women);
+
+let womenIndex = names.findIndex((value) => value.endsWith('a'));
+
+console.log(womenIndex);
+
+console.log(names);
+
+names.copyWithin(0, 1, 3);
+
+console.log(names);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> metody dla number
+//
+console.log( Number.parseInt("20zł") );
+console.log( Number.parseFloat("20.50zł") );
+console.log( Number.isNaN(undefined) );
+console.log( isNaN(undefined) );
+console.log( Number.isFinite("20") );
+console.log( isFinite("20") );
+console.log( Number.isInteger(20.05) );
+console.log( Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1) );
+console.log( Number.isSafeInteger(Number.MIN_SAFE_INTEGER - 1) );
+console.log( Number.EPSILON );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> nowe metody dla math
+//
+console.log( Math.sign(-10) );
+console.log( Math.sign(10) );
+console.log( Math.trunc(10.234) );
+
+console.log( 0xfff === 4095);
+console.log( 0b111 === 7 );
+console.log( 0o12 === 10 );
+
+console.log( (7).toString(2) );
+console.log( (10).toString(8) );
+console.log( (4095).toString(16) );
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// ---------------> nowosci dla regExp
+//
+// let s = "😀";
+
+// console.log(s.length);
+// console.log(s[0]);
+// console.log(s[1]);
+
+// for(let ch of s) {
+//     console.log(ch);
+// }
+
+// console.log( [...s].length );
+
+// let s = "Witam =😀=";
+
+// let regex = /=(.)=/u;
+
+// console.log( regex.exec(s) );
+
+let emails = "jan@kowalski.planna@nowak.pl.";
+let emailRegex = /\w+@\w+\.[a-z]{2,3}?/y;
+
+let result = null;
+
+while(result = emailRegex.exec(emails)) {
+    console.log(emailRegex.lastIndex);
+    console.log(result);
+}
+
+console.log( emailRegex.flags );
+console.log( emailRegex.sticky );
+console.log( emailRegex.unicode );
 //
 //
 //
@@ -2007,7 +2137,6 @@ let person = PersonProxy("Jan", "Kowalski");
 // --------------->
 //
 
-
 //
 //
 //
@@ -2022,71 +2151,6 @@ let person = PersonProxy("Jan", "Kowalski");
 //
 // --------------->
 //
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// --------------->
-//
-
 
 //
 //
