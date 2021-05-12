@@ -1,5 +1,7 @@
-let lis = eQuerry('li');
-console.log(lis.get())
-for (let li of lis ) {
-    console.log(li)
-}
+let lis = eQuery('li');
+// console.log(lis.get()) //[li, li, li, li, li]
+// for (let li of lis) {
+//   console.log(li);
+// }
+
+lis.attr('style', 'color: red');

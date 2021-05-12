@@ -15,9 +15,3 @@ function init(param) {
 }
 
 window.eQuery = init; // przypisujemy funkcje jako globalna
-init('li');
-console.log(init);
-
-//
-//
-// let lis = eQuerry('li');
