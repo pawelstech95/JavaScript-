@@ -1,5 +1,6 @@
 import Attributes from './Attributes.js';
 import Iteration from './Iteration.js';
+import Events from './Events.js';
 import Content from './Content.js';
 import { mixin } from '../Utils/Mixin.js';
 // uwagi - chcemy dodac itteration i attributes do naszej klasy
@@ -11,7 +12,7 @@ import { mixin } from '../Utils/Mixin.js';
 const _NODES = new WeakMap();
 
 // UWAGA - MIXIN SPRAWDZ
-class eQuery extends mixin(Attributes, Iteration, Content) {
+class eQuery extends mixin(Attributes, Iteration, Content, Events) {
   constructor(nodes) {
     super();
     if (!Array.isArray(nodes)) {

@@ -9,3 +9,4 @@ lis.addClass('red');
 lis.css('color', 'blue');
 lis.text('Nowy tekst');
 lis.html('<b>Nowa treć</b>');
+
