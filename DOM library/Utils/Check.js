@@ -13,3 +13,6 @@ export function isHTMLTag(value) {
 export function isDOMNode(value) {
   return typeof value === 'object' && value instanceof Element;
 }
+export function isObject(value) {
+  return value && value.toString() === '[object Object]';
+}
