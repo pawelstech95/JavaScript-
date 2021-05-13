@@ -5,11 +5,11 @@ export default {
     if (key !== undefined && val === undefined) {
       return this.get(0).getAttribute(key);
     } else {
-      this.each((node) => node.setAttribute(key, val));
+      return this.each((node) => node.setAttribute(key, val));
     }
   },
   addClass(className) {
-    this.each((node) => node.classList.add(className));
+    return this.each((node) => node.classList.add(className));
   },
   removeClass(className) {
     return this.each((node) => node.classList.remove(className));
@@ -30,5 +30,6 @@ export default {
     } else {
       return this.get(0).style[prop];
     }
+    return this;
   },
 };

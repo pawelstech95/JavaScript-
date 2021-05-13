@@ -9,4 +9,8 @@ lis.addClass('red');
 lis.css('color', 'blue');
 lis.text('Nowy tekst');
 lis.html('<b>Nowa treć</b>');
+lis.on('click', function () {
+  console.log(eQuery(this).text());
+});
 
+lis.addClass('blue').css('font-size', '20px');
