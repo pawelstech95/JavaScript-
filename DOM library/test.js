@@ -6,4 +6,6 @@ let lis = eQuery('li');
 
 lis.attr('style', 'color: red');
 lis.addClass('red');
-lis.css('color', 'blue')
+lis.css('color', 'blue');
+lis.text('Nowy tekst');
+lis.html('<b>Nowa treć</b>');
